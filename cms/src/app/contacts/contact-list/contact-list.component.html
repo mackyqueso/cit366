@@ -2,7 +2,7 @@
     <div class="panel panel-default">
         <div class="col-xs-12 panel-heading">
             <div class="col-xs-9">
-                <span class="heading">Contacts</span>
+                <span class="title">Contacts</span>
             </div>
             <div class="col-xs-3">
                 <button class="btn btn-success">New Contact</button>
@@ -10,11 +10,13 @@
         </div>
         <div class="panel-body">
             <div class="row">
+                <div class="col-xs-12 margin-top">
                 <cms-contact-item
                     *ngFor="let contact of contacts"
                     [contact]="contact"
-                    (recipeSelected)="onSelected(contact)">
+                    (click)="onSelected(contact)">
                 </cms-contact-item>
+                </div>
             </div>
         </div>
     </div>
