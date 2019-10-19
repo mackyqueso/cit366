@@ -20,7 +20,7 @@ export class DocumentsService {
 
    getDocument(id:string): Document {
     for (const document of this.documents){
-      if (id = document.id) {
+      if (document.id == id) {
         return document;
       }
     }

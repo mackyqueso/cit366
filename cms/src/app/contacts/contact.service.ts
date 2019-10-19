@@ -20,7 +20,7 @@ export class ContactService {
 
    getContact(id:string): Contact {
      for (const contact of this.contacts){
-       if (id = contact.id) {
+       if (contact.id == id) {
          return contact;
        }
      }

@@ -16,7 +16,7 @@ export class MessagesService {
 
   getMessage(id:string): Message {
     for (const message of this.messages){
-      if (id = message.id) {
+      if (message.id == id) {
         return message;
       }
     }
