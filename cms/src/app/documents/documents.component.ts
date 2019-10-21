@@ -8,7 +8,7 @@ import { DocumentsService } from './documents.service';
   styleUrls: ['./documents.component.css']
 })
 export class DocumentsComponent implements OnInit {
-  document: Document;
+  selectedDocument: Document;
 
   constructor(private documentService: DocumentsService) { }
 
@@ -16,7 +16,7 @@ export class DocumentsComponent implements OnInit {
     this.documentService.documentSelectedEvent
       .subscribe(
         (document: Document) => {
-          this.document = document;
+          this.selectedDocument = document;
         }
       ) 
   }

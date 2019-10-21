@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Message } from './message.model';
+import { MOCKMESSAGES } from './MOCKMESSAGES';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,9 @@ export class MessagesService {
   
   private messages: Message[] = [];
 
-  constructor() { }
+  constructor() {
+    this.messages = MOCKMESSAGES;
+   }
 
   getMessages(): Message[] {
     return this.messages.slice();
