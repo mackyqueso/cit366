@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Message } from './message.model';
-import { MOCKMESSAGES } from './MOCKMESSAGES';
 import { Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -20,7 +19,7 @@ export class MessagesService {
   storeMessages(){
     this.messages = JSON.parse(JSON.stringify(this.messages));
     const header = new HttpHeaders({'Content-Type': 'application/json'});
-    this.http.put('https://mshcms-45003.firebaseio.com/messages.json', this.messages, {headers: header})
+    this.http.put('http://localhost:3000/messages', this.messages, {headers: header})
       .subscribe(
         (documents: Document[]) => {
           this.messageChangedEvent.next(this.messages.slice());
@@ -29,10 +28,10 @@ export class MessagesService {
   }
 
   getMessages() {
-    this.http.get<Message[]>('https://mshcms-45003.firebaseio.com/messages.json')
+    this.http.get<{message: string, messages: Message[]}>('http://localhost:3000/messages')
       .subscribe(
         (res) => {
-          this.messages = res;
+          this.messages = res.messages;
           this.messages.sort((a, b) => (a['name'] < b['name']) ? 1 : (a['name'] > b['name']) ? -1 : 0);
           this.messageChangedEvent.next(this.messages.slice());
         }
@@ -49,14 +48,24 @@ export class MessagesService {
   }
 
   addMessage(newMessage: Message) {
-    if (newMessage === null) {
+    if (!newMessage) {
       return;
     }
 
-    this.maxMessageId++;
-    newMessage.id = String(this.maxMessageId);
-    this.messages.push(newMessage);
-    this.storeMessages();
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    newMessage.id = '';
+    const strMessage = JSON.stringify(newMessage);
+
+    this.http.post<{ jsMessage: string, message: Message}>
+    ('http://localhost:3000/documents', strMessage, { headers: headers })
+     .subscribe(
+       (responseData) => {
+         this.messages.push(responseData.message);
+         this.messageChangedEvent.next(this.messages.slice());
+       });
   }
 
   getMaxId(): number {
