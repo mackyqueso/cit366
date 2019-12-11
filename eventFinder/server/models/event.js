@@ -8,4 +8,4 @@ var schema = new Schema({
     description: {type: String}
 });
 
-module.exports = mongoose.model('Message', schema);
+module.exports = mongoose.model('Event', schema);

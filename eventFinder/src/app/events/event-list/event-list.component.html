@@ -3,6 +3,8 @@
     <h3>Events</h3>
   </span>
   <li class="list-group-item">
-    <app-event-item></app-event-item>
+    <app-event-item
+      *ngFor="let event of events"
+      [event]="event"></app-event-item>
   </li>
 </div>

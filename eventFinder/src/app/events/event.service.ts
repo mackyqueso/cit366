@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Event } from './event.model';
+import { Event } from '../shared/event.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ThrowStmt } from '@angular/compiler';
 
@@ -8,6 +8,7 @@ import { ThrowStmt } from '@angular/compiler';
   providedIn: 'root'
 })
 export class EventService {
+  eventSelectedEvent = new EventEmitter<Event[]>();
   eventChangedEvent= new Subject<Event[]>();
   private maxEventId: number;
   private events: Event[] = [];

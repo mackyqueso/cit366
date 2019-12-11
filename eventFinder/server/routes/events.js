@@ -14,6 +14,7 @@ function returnError(res, error) {
 router.get("/", (req, res, next) => {
    Event.find()
     .then(events => {
+      console.log(res);
         res.status(200).json({
             message: "Event Fetched successfully",
             events: events

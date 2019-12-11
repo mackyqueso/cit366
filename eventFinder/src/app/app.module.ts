@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EventListComponent } from './event-list/event-list.component';
-import { EventItemComponent } from './event-list/event-item/event-item.component';
-import { EventDetailComponent } from './event-list/event-detail/event-detail.component';
-import { EventEditComponent } from './event-list/event-edit/event-edit.component';
+import { EventListComponent } from './events/event-list/event-list.component';
+import { EventItemComponent } from './events/event-item/event-item.component';
+import { EventDetailComponent } from './events/event-detail/event-detail.component';
+import { EventEditComponent } from './events/event-edit/event-edit.component';
 import { SearchComponent } from './search/search.component';
-import { AddEventComponent } from './add-event/add-event.component';
+import { EventsComponent } from './events/events.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { AddEventComponent } from './add-event/add-event.component';
     EventDetailComponent,
     EventEditComponent,
     SearchComponent,
-    AddEventComponent
+    EventsComponent
   ],
   imports: [
     BrowserModule,

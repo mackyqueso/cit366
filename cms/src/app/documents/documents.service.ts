@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Document } from './document.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class DocumentsService {
+  documentSelectedEvent = new EventEmitter<Document[]>();
   documentChangedEvent = new Subject<Document[]>();
 
   documents: Document[] = [];
