@@ -11,7 +11,7 @@
               id="name"
               class="form-control"
               name="name"
-              ngModel
+              [ngModel]="event?.name"
               #name="ngModel"
               required
               size="120"
@@ -33,16 +33,15 @@
           <div class="col-sm-12 form-group">
             <label for="date">Date</label>
             <input
-              [matDatepicker]="myDatepicker"
+              
+              type="date"
               id="date"
               class="form-control"
               name="date"
               required
-              ngModel
-              #date="ngModel"
+              [ngModel]="event?.date"
               size="150"
               max="255">
-            <mat-datepicker #myDatepicker></mat-datepicker>
           </div>
         </div>
 

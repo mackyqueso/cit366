@@ -25,19 +25,24 @@ export class EventEditComponent implements OnInit {
         (params: Params) => {
           this.id = params['id'];
 
-          if(this.id === null || this.id === undefined) {
+          if (!this.id) {
             this.editMode = false;
             return;
           }
-          this.originalEvent = this.eventService.getEvent(this.id);
-          if (this.originalEvent === null || this.originalEvent === undefined) {
-            this.editMode = false;
+          this.eventService.getEvent(this.id)
+            .subscribe(eventData => {
+              console.log(eventData)
+              this.originalEvent = eventData.event;
+            
+          if (!this.originalEvent) {
             return;
           }
           this.editMode = true;
           this.event = JSON.parse(JSON.stringify(this.originalEvent));
+          console.log(this.event);
         }
       );
+        });
   }
 
   onSubmit(form: NgForm) {

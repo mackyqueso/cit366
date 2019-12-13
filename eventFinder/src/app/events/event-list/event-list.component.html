@@ -1,10 +1,16 @@
-<div class="list-group">
-  <span class="list-group-item-dark">
-    <h3>Events</h3>
-  </span>
-  <li class="list-group-item">
-    <app-event-item
-      *ngFor="let event of events"
-      [event]="event"></app-event-item>
-  </li>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="row pad-left-right">
+      <span class="pull-left title">Events</span>
+      <a class="btn btn-success pull-right" [routerLink]="['new']">New Event</a>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="center-panel">
+      <app-event-item
+        *ngFor="let event of events"
+        [event]="event">
+      </app-event-item>
+    </div>
+  </div>
 </div>

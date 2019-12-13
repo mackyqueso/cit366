@@ -29,22 +29,24 @@ export class ContactEditComponent implements OnInit {
         (params: Params) => {
           this.id = params['id'];
 
-          if (this.id === null || this.id === undefined) {
+          if (!this.id) {
             this.editMode = false;
             return;
           }
           this.contactService.getContact(this.id)
             .subscribe(contactData => {
+              console.log(contactData)
               this.originalContact = contactData.contact;
-            });
-          if (this.originalContact === null || this.originalContact === undefined) {
-            this.editMode = false;
+            
+          if (!this.originalContact) {
             return;
           }
           this.editMode = true;
           this.contact = JSON.parse(JSON.stringify(this.originalContact));
+          console.log(this.contact);
         }
       );
+        });
   }
 
   onSubmit(form: NgForm) {

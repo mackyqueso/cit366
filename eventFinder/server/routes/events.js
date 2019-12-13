@@ -16,7 +16,7 @@ router.get("/", (req, res, next) => {
     .then(events => {
       console.log(res);
         res.status(200).json({
-            message: "Event Fetched successfully",
+            message: "Events Fetched successfully",
             events: events
         });
     })
@@ -24,6 +24,21 @@ router.get("/", (req, res, next) => {
         returnError(res, error);
     });
 });
+
+
+router.get("/:id", (req, res, next) => {
+  Event.findOne({"id": req.params.id})
+    .then(event => {
+      res.status(200).json({
+        message: "Event fetched successfully",
+        event: event
+      });
+    })
+    .catch(error => {
+      returnError(res, error);
+    });
+});
+
 
 router.post("/", (req, res, next) => {
     const maxEventId = sequenceGenerator.nextId("events");
@@ -40,7 +55,7 @@ router.post("/", (req, res, next) => {
       .then(createdMessage => {
         res.status(201).json({
           message: "Event added successfully",
-          messageId: createdMessage.id
+          event: createdMessage
         });
       })
       .catch(error => {
@@ -50,7 +65,7 @@ router.post("/", (req, res, next) => {
   
   router.put("/:id", (req, res, next) => {
     Event.findOne({ id: req.params.id })
-      .then(Event => {
+      .then(events => {
         console.log(req.body);
         events.name = req.body.name;
         events.date = req.body.date;

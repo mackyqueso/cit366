@@ -2,7 +2,6 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Event } from '../shared/event.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ThrowStmt } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -39,12 +38,9 @@ export class EventService {
     );
   }
 
-  getEvent(id: string): Event {
-    for( const event of this.events){
-      if (event.id == id) {
-        return event;
-      }
-    }
+  getEvent(id: string) {
+    return this.http.get<{message: string, event: Event}>('http://localhost:3000/events/' + id);
+
   }
 
   addEvent(newEvent: Event) {
@@ -60,7 +56,7 @@ export class EventService {
     const strEvent = JSON.stringify(newEvent);
 
     this.http.post<{ message: string, event: Event}>
-    ('http://localhost:3000/events', strEvent, { headers: headers })
+    ('http://localhost:3000/events/', strEvent, { headers: headers })
      .subscribe(
        (responseData) => {
          this.events.push(responseData.event);
@@ -85,7 +81,7 @@ export class EventService {
 
     const strEvent = JSON.stringify(newEvent);
 
-    this.http.patch('http://localhost:3000/events' + originalEvent.id
+    this.http.patch('http://localhost:3000/events/' + originalEvent.id
                    , strEvent
                    , {headers: headers})
      .subscribe(
@@ -102,7 +98,7 @@ export class EventService {
 
     const pos = this.events.findIndex(d => d.id === event.id);
 
-   this.http.delete('http://localhost:3000/events' + event.id)
+   this.http.delete('http://localhost:3000/events/' + event.id)
      .subscribe(
        (response: Response) => {
          this.events.splice(pos, 1);

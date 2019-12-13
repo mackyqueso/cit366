@@ -7,13 +7,13 @@ import { EventDetailComponent } from './events/event-detail/event-detail.compone
 
 
 const routes: Routes = [
-  { path:'', redirectTo: '/events', pathMatch: 'full' },
+  { path: '', redirectTo: '/events', pathMatch: 'full' },
   { path: 'events', component: EventsComponent, children: [
     { path: 'new', component: EventEditComponent },
     { path: ':id', component: EventDetailComponent },
-    { path: ':id/edit', component: EventEditComponent }
-  ]}
-];
+    { path: ':id/edit', component: EventEditComponent } ]
+  }];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

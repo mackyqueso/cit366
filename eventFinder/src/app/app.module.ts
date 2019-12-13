@@ -1,5 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +12,8 @@ import { EventDetailComponent } from './events/event-detail/event-detail.compone
 import { EventEditComponent } from './events/event-edit/event-edit.component';
 import { SearchComponent } from './search/search.component';
 import { EventsComponent } from './events/events.component';
+
+
 
 @NgModule({
   declarations: [
@@ -22,7 +27,9 @@ import { EventsComponent } from './events/events.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

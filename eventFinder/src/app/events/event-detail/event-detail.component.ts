@@ -11,6 +11,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 export class EventDetailComponent implements OnInit {
   event: Event;
   id: string;
+  eventDate: string;
 
   constructor(private eventService: EventService,
               private route: ActivatedRoute,
@@ -21,8 +22,12 @@ export class EventDetailComponent implements OnInit {
       .subscribe(
         (params: Params) => {
           this.id = params['id'];
-          this.event = this.eventService.getEvent(this.id);
-        });
+          this.eventService.getEvent(this.id)
+            .subscribe(eventData => {
+              this.event = eventData.event;
+              this.eventDate = new Date(eventData.event.date).toDateString();
+            });
+    });
   }
 
   onDelete() {
